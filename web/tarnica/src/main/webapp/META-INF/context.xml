@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Manager pathname="" />
+	<Resource name="BeanManager" auth="Container" type="javax.enterprise.inject.spi.BeanManager" factory="org.jboss.weld.resources.ManagerObjectFactory" />
+
+	<Realm className="org.apache.catalina.realm.JAASRealm" appName="IozLoginModule" userClassNames="pl.beriko.ioz.model.security.AuthorizedUserImpl"
+		roleClassNames="pl.beriko.ioz.model.security.AuthorizedUserRoleImpl" />
+</Context>

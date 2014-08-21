@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<h:panelGroup layout="block" id="menu" xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jstl/core">
+    <h:form>
+        <ul>
+            <li class="first"><a href="#" accesskey="1" title="">Home</a></li>
+            <li><a href="#" accesskey="2" title="">About Us</a></li>
+            <li><a href="#" accesskey="3" title="">Products</a></li>
+            <li><a href="#" accesskey="4" title="">Services</a></li>
+            <li><a href="#" accesskey="5" title="">Contact Us</a></li>
+            <c:if test="#{authController.user == null}">
+            <li><h:outputLink value="login.html">Login</h:outputLink></li>
+            </c:if>
+            <c:if test="#{authController.user != null}">
+            <li><h:commandLink action="#{authController.logout}" value="Logout"/></li>
+            </c:if>
+        </ul>
+    </h:form>
+</h:panelGroup>

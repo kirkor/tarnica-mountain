@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<h:html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<p:panel id="siteHeader" style="height: 35px;">
+		<div style="width: 200px; float: left; font-weight: bold; font-size: 20px; margin: 0px;">
+			<h:outputText value="#{messages['global.site.name']}" />
+		</div>
+		
+		<h:panelGroup layout="block" id="loginSection" rendered="#{request.remoteUser == null}">
+			<div style="width: 500px; float: left; text-align: center; margin-top: 5px;">
+				<h:link value="#{messages['global.site.login']}" title="#{messages['global.site.login']}" onclick="PF('dlg').show(); return false;" />
+				*
+				<h:link value="#{messages['global.site.register']}" title="#{messages['global.site.register']}" outcome="/pages/register.xhtml" />
+			</div>
+
+			<h:form id="loginForm">
+				<p:growl id="growl" showDetail="true" life="3000" />
+
+				<p:dialog id="loginDialog" modal="true" header="#{messages['global.site.login']}" widgetVar="dlg" resizable="false" draggable="false">
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputLabel for="username" value="#{messages['login.page.username']}" />
+						<p:inputText value="#{authController.username}" id="username" required="true" label="#{messages['login.page.username']}" />
+
+						<h:outputLabel for="password" value="#{messages['login.page.password']}" />
+						<p:password value="#{authController.password}" id="password" required="true" label="#{messages['login.page.password']}" />
+
+						<f:facet name="footer">
+							<p:commandButton id="loginButton" value="#{messages['login.page.action']}" update="growl" actionListener="#{authController.login}"
+								oncomplete="handleLoginRequest(xhr, status, args)" ajax="true" />
+						</f:facet>
+					</h:panelGrid>
+
+				</p:dialog>
+			</h:form>
+
+			<script type="text/javascript">
+				function handleLoginRequest(xhr, status, args) {
+					if (args.validationFailed || !args.loggedIn) {
+						PF('dlg').jq.effect("shake", {
+							times : 5
+						}, 100);
+					} else {
+						PF('dlg').hide();
+					}
+				}
+			</script>
+		</h:panelGroup>
+		
+		<h:panelGroup layout="block" id="logoutSection" rendered="#{request.remoteUser != null}">
+			#{request.remoteUser}
+			
+			<h:link outcome="#{authController.logout}">Logout</h:link>
+		</h:panelGroup>
+
+		<div style="float: right;">
+			<h:form id="lang">
+				<h:outputText value="#{messages['global.site.language']}" style="float: left; margin-top: 5px; margin-right: 5px;" />
+
+				<p:selectOneMenu value="#{language.localeCode}" immediate="true" onchange="jQuery('#lang').submit()"
+					valueChangeListener="#{language.countryLocaleCodeChanged}" id="langSelector">
+					<f:selectItems value="#{language.countriesInMap}" />
+				</p:selectOneMenu>
+			</h:form>
+		</div>
+	</p:panel>
+</f:view>
+</h:html>

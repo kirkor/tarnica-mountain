@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<head>
+    <title><ui:insert name="title">Default Title</ui:insert></title>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+</head>
+
+<body>
+<f:view>
+<div id="outer">
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+    <ui:insert name="top_menu">
+        <ui:include src="top_menu.xhtml"/>
+    </ui:insert>
+
+    <div id="content">
+        <ui:insert name="right_menu">
+            <ui:include src="right_menu.xhtml"/>
+        </ui:insert>
+
+        <div id="primaryContentContainer">
+            <div id="primaryContent">
+                <ui:insert name="content">
+                    <ui:include src="content.xhtml"/>
+                </ui:insert>
+            </div>
+        </div>
+        <ui:insert name="left_menu">
+            <ui:include src="left_menu.xhtml"/>
+        </ui:insert>
+
+        <div class="clear"/>
+    </div>
+    <ui:insert name="footer">
+        <ui:include src="footer.xhtml"/>
+    </ui:insert>
+</div>
+</f:view>
+</body>
+</html>
+

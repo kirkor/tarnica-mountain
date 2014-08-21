@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="false">
+		<class-a>pl.com.bernas.ioz.domain.user.UserDto</class-a>
+		<class-b>pl.com.bernas.ioz.security.model.AuthorizedUserImpl</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>userName</a>
+			<b>userName</b>
+		</field>
+		<field>
+			<a>details.firstName</a>
+			<b>firstName</b>
+		</field>
+		<field>
+			<a>details.lastName</a>
+			<b>lastName</b>
+		</field>
+		<field>
+			<a>online</a>
+			<b>online</b>
+		</field>
+		<field>
+			<a>roles</a>
+			<b>roles</b>
+			<a-hint>pl.com.bernas.ioz.domain.user.RoleDto</a-hint>
+			<b-hint>pl.com.bernas.ioz.security.model.AuthorizedUserRoleImpl</b-hint>
+		</field>
+	</mapping>
+
+	<mapping wildcard="false">
+		<class-a>pl.com.bernas.ioz.domain.user.RoleDto</class-a>
+		<class-b>pl.com.bernas.ioz.security.model.AuthorizedUserRoleImpl</class-b>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+	</mapping>
+
+</mappings>
