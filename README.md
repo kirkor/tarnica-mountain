@@ -33,5 +33,5 @@ TODO
 * clean code and refactorin
 * add new stuff with TDD
 
-Build status
+##Build status
 [![Build Status](https://travis-ci.org/kirkor/tarnica-mountain.svg?branch=master)](https://travis-ci.org/kirkor/tarnica-mountain)
