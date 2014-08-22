@@ -3,9 +3,9 @@ jdk:
 - oraclejdk8
 
 before_script:
- - "echo $JAVA_OPTS"
- - "export JAVA_OPTS=-Xmx512m"
+- "echo $JAVA_OPTS"
+- "export JAVA_OPTS=-Xmx512m"
 
- script:
- - mvn -U package
+script:
+- "mvn -U package"
  
