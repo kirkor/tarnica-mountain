@@ -20,8 +20,8 @@ import javax.persistence.Version;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import pl.com.bernas.ioz.model.AbstractIozEntity;
-import pl.com.bernas.ioz.user.model.User;
+import pl.com.bernas.tarnica.model.AbstractTarnicaEntity;
+import pl.com.bernas.tarnica.user.model.User;
 
 /**
  * User: iru Date: Feb 10, 2010 Time: 3:27:15 PM
@@ -29,7 +29,7 @@ import pl.com.bernas.ioz.user.model.User;
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }), @UniqueConstraint(columnNames = { "email" }) })
 @Cacheable
-public class UserEntity extends AbstractIozEntity implements User {
+public class UserEntity extends AbstractTarnicaEntity implements User {
 
 	private static final long serialVersionUID = 5479375943306863580L;
 

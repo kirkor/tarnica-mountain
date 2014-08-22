@@ -15,9 +15,9 @@ import pl.com.bernas.ioz.user.dao.UserDao;
 import pl.com.bernas.ioz.user.domain.UserDto;
 import pl.com.bernas.ioz.user.domain.mapper.Dozer;
 import pl.com.bernas.ioz.user.model.RoleEntity;
-import pl.com.bernas.ioz.user.model.User;
 import pl.com.bernas.ioz.user.model.UserEntity;
 import pl.com.bernas.ioz.user.service.UserService;
+import pl.com.bernas.tarnica.user.model.User;
 
 @Stateless(name = "userService")
 public class UserServiceImpl implements UserService<User> {

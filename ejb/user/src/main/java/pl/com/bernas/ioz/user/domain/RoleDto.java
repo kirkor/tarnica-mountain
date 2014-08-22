@@ -1,10 +1,10 @@
 package pl.com.bernas.ioz.user.domain;
 
-import pl.com.bernas.ioz.dto.AbstractDto;
-import pl.com.bernas.ioz.model.IozEntity;
-import pl.com.bernas.ioz.user.model.Role;
+import pl.com.bernas.tarnica.dto.AbstractDto;
+import pl.com.bernas.tarnica.model.TarnicaEntity;
+import pl.com.bernas.tarnica.user.model.Role;
 
-public class RoleDto extends AbstractDto implements Role, IozEntity {
+public class RoleDto extends AbstractDto implements Role, TarnicaEntity {
 
 	private static final long serialVersionUID = -8480739994130342811L;
 

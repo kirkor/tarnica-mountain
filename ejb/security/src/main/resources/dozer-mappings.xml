@@ -3,8 +3,8 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
 	<mapping wildcard="false">
-		<class-a>pl.com.bernas.ioz.domain.user.UserDto</class-a>
-		<class-b>pl.com.bernas.ioz.security.model.AuthorizedUserImpl</class-b>
+		<class-a>pl.com.bernas.tarnica.user.model.User</class-a>
+		<class-b>pl.com.bernas.tarnica.security.domain.AuthorizedUserImpl</class-b>
 		<field>
 			<a>id</a>
 			<b>id</b>
@@ -28,14 +28,14 @@
 		<field>
 			<a>roles</a>
 			<b>roles</b>
-			<a-hint>pl.com.bernas.ioz.domain.user.RoleDto</a-hint>
-			<b-hint>pl.com.bernas.ioz.security.model.AuthorizedUserRoleImpl</b-hint>
+			<a-hint>pl.com.bernas.tarnica.user.model.Role</a-hint>
+			<b-hint>pl.com.bernas.tarnica.security.domain.AuthorizedUserRoleImpl</b-hint>
 		</field>
 	</mapping>
 
 	<mapping wildcard="false">
-		<class-a>pl.com.bernas.ioz.domain.user.RoleDto</class-a>
-		<class-b>pl.com.bernas.ioz.security.model.AuthorizedUserRoleImpl</class-b>
+		<class-a>pl.com.bernas.tarnica.user.model.Role</class-a>
+		<class-b>pl.com.bernas.tarnica.security.domain.AuthorizedUserRoleImpl</class-b>
 		<field>
 			<a>name</a>
 			<b>name</b>

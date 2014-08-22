@@ -6,7 +6,7 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import pl.com.bernas.ioz.user.model.UserDetails;
+import pl.com.bernas.tarnica.user.model.UserDetails;
 
 /**
  * @author octavian.rusu

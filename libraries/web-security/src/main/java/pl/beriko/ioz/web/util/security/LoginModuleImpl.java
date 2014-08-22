@@ -24,6 +24,7 @@ import pl.com.bernas.ioz.security.service.AuthorizationService;
 public class LoginModuleImpl implements LoginModule {
 
 	private Context ctx;
+	// TODO: move somewhere else
 	private final static String AUTH_BEAN = "ejb:ioz-ear/ioz-security-services/authorizationService!pl.beriko.ioz.service.security.AuthorizationService";
 
 	private AuthorizationService authenticationService;
@@ -87,9 +88,8 @@ public class LoginModuleImpl implements LoginModule {
 		
 		if (!this.subject.getPrincipals().contains(this.user)) {
             this.subject.getPrincipals().add(this.user);
-            for (AuthorizedUserRole role : user.getRoles()) {
-    			this.subject.getPrincipals().add(role);
-    		}
+            
+            user.getRoles().forEach(role -> this.subject.getPrincipals().add(role));           
         }		
 
 		SecurityUtil.propagateSubject(this.subject);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import pl.com.bernas.ioz.user.model.UserAddress;
+import pl.com.bernas.tarnica.user.model.UserAddress;
 
 /**
  * @author octavian.rusu

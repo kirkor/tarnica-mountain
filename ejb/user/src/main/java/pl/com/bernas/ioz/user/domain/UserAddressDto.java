@@ -2,7 +2,7 @@ package pl.com.bernas.ioz.user.domain;
 
 import java.io.Serializable;
 
-import pl.com.bernas.ioz.user.model.UserAddress;
+import pl.com.bernas.tarnica.user.model.UserAddress;
 
 public class UserAddressDto implements Serializable, UserAddress {
 

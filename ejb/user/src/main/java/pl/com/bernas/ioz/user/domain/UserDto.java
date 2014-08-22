@@ -2,8 +2,8 @@ package pl.com.bernas.ioz.user.domain;
 
 import java.util.Set;
 
-import pl.com.bernas.ioz.dto.AbstractDto;
-import pl.com.bernas.ioz.user.model.User;
+import pl.com.bernas.tarnica.dto.AbstractDto;
+import pl.com.bernas.tarnica.user.model.User;
 
 public class UserDto extends AbstractDto implements User {
 

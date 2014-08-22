@@ -21,6 +21,7 @@ public class HttpCallbackHandler implements CallbackHandler {
 	}
 
 	public void handle(Callback[] callbacks) {
+		// TODO: visitor
 		for (Callback callback : callbacks) {
 			if (callback instanceof NameCallback) {
 				NameCallback nameCB = (NameCallback) callback;

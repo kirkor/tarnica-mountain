@@ -3,7 +3,7 @@ package pl.com.bernas.ioz.user.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-import pl.com.bernas.ioz.user.model.UserDetails;
+import pl.com.bernas.tarnica.user.model.UserDetails;
 
 public class UserDetailsDto implements Serializable, UserDetails {
 

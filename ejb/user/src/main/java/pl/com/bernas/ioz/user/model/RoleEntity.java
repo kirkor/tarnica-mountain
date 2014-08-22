@@ -4,13 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import pl.com.bernas.ioz.model.AbstractIozEntity;
-import pl.com.bernas.ioz.model.IozEntity;
-import pl.com.bernas.ioz.user.model.Role;
+import pl.com.bernas.tarnica.model.AbstractTarnicaEntity;
+import pl.com.bernas.tarnica.model.TarnicaEntity;
+import pl.com.bernas.tarnica.user.model.Role;
 
 @Entity
 @Table(name = "roles")
-public class RoleEntity extends AbstractIozEntity implements Role, IozEntity {
+public class RoleEntity extends AbstractTarnicaEntity implements Role, TarnicaEntity {
 
 	private static final long serialVersionUID = 2452398568786544541L;
 
