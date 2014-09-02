@@ -13,6 +13,7 @@
 	</parent>
 
 	<modules>
+		<module>api/parent</module>
 		<module>api/security-api</module>
 		<module>api/user-api</module>
 		
@@ -21,6 +22,7 @@
 		
 		<module>ejb/security</module>
 		<module>ejb/user</module>
+		<module>ejb/ear</module>
 		
 		<module>web/tarnica</module>
   </modules>
