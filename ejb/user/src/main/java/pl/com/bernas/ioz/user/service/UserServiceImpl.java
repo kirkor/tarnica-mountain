@@ -22,7 +22,7 @@ import pl.com.bernas.tarnica.user.model.User;
 @Stateless(name = "userService")
 public class UserServiceImpl implements UserService<User> {
 
-	@EJB(beanName = "userDaoDirty")
+	@EJB(beanName = "userDao")
 	private UserDao<UserEntity> userDao;
 
 	@EJB

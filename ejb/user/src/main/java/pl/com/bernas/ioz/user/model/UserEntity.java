@@ -33,8 +33,6 @@ public class UserEntity extends AbstractTarnicaEntity implements User {
 
 	private static final long serialVersionUID = 5479375943306863580L;
 
-	private int version;
-
 	private String username;
 	private String password;
 	private String email;
@@ -42,16 +40,6 @@ public class UserEntity extends AbstractTarnicaEntity implements User {
 	private UserDetailsEntity details;
 	private UserAddressEntity address;
 	private Set<RoleEntity> roles;
-
-	@Version
-	@Column(name = "version", nullable = false, unique = false)
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
 
 	@Column(name = "username", nullable = false, unique = true)
 	public String getUsername() {
