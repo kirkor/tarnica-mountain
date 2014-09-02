@@ -7,8 +7,10 @@ import javax.security.auth.login.LoginException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import pl.com.bernas.ioz.security.model.AuthorizedUser;
 import pl.com.bernas.ioz.user.service.UserService;
@@ -19,9 +21,11 @@ import pl.com.bernas.tarnica.user.model.User;
 @SuppressWarnings("unused")
 public class AuthorizationServiceTest {
 
+	@InjectMocks
 	private final AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
 	@Mock
 	private UserService<User> userService;
+	@Spy
 	private Dozer dozer = DozerFactory.prepareDoozerForTests();
 	@Mock
 	private User kirkor;
@@ -34,9 +38,6 @@ public class AuthorizationServiceTest {
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
-
-		authorizationService.userService = userService;
-		authorizationService.dozer = dozer;
 
 		when(kirkor.getUsername()).thenReturn("KirkoR");
 		when(kirkor.getPassword()).thenReturn(passwordForString123qwe);
