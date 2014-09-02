@@ -250,18 +250,20 @@
 				<groupId>pl.com.bernas.tarnica</groupId>
 				<artifactId>user</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
+				<type>ejb</type>
 			</dependency>
 
 			<dependency>
 				<groupId>pl.com.bernas.tarnica</groupId>
 				<artifactId>security</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
+				<type>ejb</type>
 			</dependency>
 
 			<!-- TESTS -->
 			<dependency>
 				<groupId>org.mockito</groupId>
-				<artifactId>mockito-all</artifactId>
+				<artifactId>mockito-core</artifactId>
 				<version>1.9.5</version>
 			</dependency>
 
@@ -280,9 +282,8 @@
 						<source>1.8</source>
 						<target>1.8</target>
 					</configuration>
-				</plugin>				
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>
