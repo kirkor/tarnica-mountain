@@ -30,8 +30,9 @@ TODO
 
 * write junit test with mockito and spoock
 * make the project to work
-* clean code and refactorin
+* clean code and refactoring
 * add new stuff with TDD
+* ~~create ear project~~
 
 ##Build status
 [![Build Status](https://travis-ci.org/kirkor/tarnica-mountain.svg?branch=master)](https://travis-ci.org/kirkor/tarnica-mountain)
