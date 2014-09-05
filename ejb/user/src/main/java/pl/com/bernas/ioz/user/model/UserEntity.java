@@ -106,14 +106,4 @@ public class UserEntity extends AbstractTarnicaEntity implements User {
 	public void setRoles(Set<RoleEntity> roles) {
 		this.roles = roles;
 	}
-
-	@PrePersist
-	void onCreate() {
-		this.setVersion(1);
-	}
-
-	@PreUpdate
-	void onPersist() {
-		this.setVersion(this.getVersion() + 1);
-	}
 }
