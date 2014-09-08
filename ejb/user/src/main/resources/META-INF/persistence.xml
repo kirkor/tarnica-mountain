@@ -4,16 +4,16 @@
 	<persistence-unit name="primary" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/iozDS</jta-data-source>
 		<class>pl.com.bernas.tarnica.model.AbstractTarnicaEntity</class>
-		<class>pl.com.bernas.ioz.user.model.UserAddressEntity</class>
-		<class>pl.com.bernas.ioz.user.model.UserEntity</class>
 		<class>pl.com.bernas.ioz.user.model.RoleEntity</class>
+		<class>pl.com.bernas.ioz.user.model.UserAddressEntity</class>
 		<class>pl.com.bernas.ioz.user.model.UserDetailsEntity</class>
+		<class>pl.com.bernas.ioz.user.model.UserEntity</class>
 				
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
 		<properties>
 			<!-- Properties for Hibernate -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 		</properties>

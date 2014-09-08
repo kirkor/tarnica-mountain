@@ -7,21 +7,18 @@ import javax.persistence.Embeddable;
 
 import pl.com.bernas.tarnica.user.model.UserAddress;
 
-/**
- * @author octavian.rusu
- * @version 1.0 Date: Feb 21, 2010
- */
-
 @Embeddable
 public class UserAddressEntity implements Serializable, UserAddress {
 
 	private static final long serialVersionUID = 3767313076964628529L;
 
-	private String country;
-	private String province;
-	private String city;
-
 	@Column(name = "country")
+	private String country;
+	@Column(name = "province")
+	private String province;
+	@Column(name = "city")
+	private String city;
+	
 	public String getCountry() {
 		return country;
 	}
@@ -30,7 +27,6 @@ public class UserAddressEntity implements Serializable, UserAddress {
 		this.country = country;
 	}
 
-	@Column(name = "province")
 	public String getProvince() {
 		return province;
 	}
@@ -39,7 +35,6 @@ public class UserAddressEntity implements Serializable, UserAddress {
 		this.province = province;
 	}
 
-	@Column(name = "city")
 	public String getCity() {
 		return city;
 	}

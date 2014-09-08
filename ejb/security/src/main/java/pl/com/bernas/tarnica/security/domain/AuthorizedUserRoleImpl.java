@@ -16,13 +16,6 @@ public class AuthorizedUserRoleImpl implements AuthorizedUserRole {
 	public AuthorizedUserRoleImpl() {
 	}
 
-	// public AuthorizedRole(RoleEntity roleEntity) {
-	// this.name = roleEntity.getName();
-	// for (PermissionEntity pe : roleEntity.getPermissions()) {
-	// TODO: DOZER + DTO addPermission(pe.toPermision());
-	// }
-	// }
-
 	public AuthorizedUserRoleImpl(String name) {
 		this.name = name;
 	}

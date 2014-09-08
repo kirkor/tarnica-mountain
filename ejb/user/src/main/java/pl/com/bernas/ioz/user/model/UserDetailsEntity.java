@@ -18,12 +18,15 @@ public class UserDetailsEntity implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = -2338876410494616094L;
 
+	@Column(name = "first_name")
 	private String firstName;
+	@Column(name = "last_name")
 	private String lastName;
+	@Column(name = "gender")
 	private String gender;
+	@Column(name = "birth_date")
 	private Date birthDate;
 
-	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -32,7 +35,6 @@ public class UserDetailsEntity implements Serializable, UserDetails {
 		this.firstName = firstName;
 	}
 
-	@Column(name = "last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -41,7 +43,6 @@ public class UserDetailsEntity implements Serializable, UserDetails {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "gender")
 	public String getGender() {
 		return gender;
 	}
@@ -50,7 +51,6 @@ public class UserDetailsEntity implements Serializable, UserDetails {
 		this.gender = gender;
 	}
 
-	@Column(name = "birth_date")
 	public Date getBirthDate() {
 		return birthDate;
 	}

@@ -3,6 +3,9 @@ package pl.com.bernas.tarnica.security.domain.mapper;
 public class DozerFactory {
 	private static volatile Dozer instance = null;
 
+	private DozerFactory() {
+	}
+
 	public static Dozer prepareDoozerForTests() {
 		if (instance == null) {
 			synchronized (DozerFactory.class) {

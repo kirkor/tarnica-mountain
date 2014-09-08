@@ -1,6 +1,6 @@
 package pl.com.bernas.tarnica.security.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import javax.security.auth.login.LoginException;
@@ -18,7 +18,6 @@ import pl.com.bernas.tarnica.security.domain.mapper.Dozer;
 import pl.com.bernas.tarnica.security.domain.mapper.DozerFactory;
 import pl.com.bernas.tarnica.user.model.User;
 
-@SuppressWarnings("unused")
 public class AuthorizationServiceTest {
 
 	@InjectMocks
@@ -30,18 +29,18 @@ public class AuthorizationServiceTest {
 	@Mock
 	private User kirkor;
 
-	private final String userName = "KirkoR";
-	private final String userPassword = "123qwe";
-	private final String userBadPassword = "123QWE";
-	private final String passwordForString123qwe = "150b8d563acdef89a3465e1032997e754a102d90b96b86bb42a79973d6f6987a";
+	private static final String USERNAME = "KirkoR";
+	private static final String USER_PASSWORD = "123qwe";
+	private static final String USER_BADP_ASSWORD = "123_QWE_5";
+	private static final String PASSWORD_FOR_STRING_123QWE = "150b8d563acdef89a3465e1032997e754a102d90b96b86bb42a79973d6f6987a";
 
 	@Before
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 
-		when(kirkor.getUsername()).thenReturn("KirkoR");
-		when(kirkor.getPassword()).thenReturn(passwordForString123qwe);
-		when(userService.findByUserName("KirkoR")).thenReturn(kirkor);
+		when(kirkor.getUsername()).thenReturn(USERNAME);
+		when(kirkor.getPassword()).thenReturn(PASSWORD_FOR_STRING_123QWE);
+		when(userService.findByUserName(USERNAME)).thenReturn(kirkor);
 
 		doAnswer(answer -> when(kirkor.isOnline()).thenReturn(Boolean.TRUE)).when(userService).online(kirkor);
 		doAnswer(answer -> when(kirkor.isOnline()).thenReturn(Boolean.FALSE)).when(userService).offline(kirkor);
@@ -49,72 +48,83 @@ public class AuthorizationServiceTest {
 
 	@Test
 	public void loginIntoExistingAccount() throws LoginException {
-		AuthorizedUser login = authorizationService.login(userName, userPassword);
+		// GIVEN:
 
-		assertEquals(login.getUsername(), userName);
+		// WHEN:
+		AuthorizedUser login = authorizationService.login(USERNAME, USER_PASSWORD);
+
+		// THEN:
+		assertEquals(login.getUsername(), USERNAME);
 	}
 
-	@Test(expected = LoginException.class)
+	@Test
+	public void tryToLoginByUnknownUser() throws LoginException {
+		// GIVEN:
+		String unknownUser = "gbernas";
+		String unknownUserPassword = "none";
+
+		// WHEN:
+		AuthorizedUser login = authorizationService.login(unknownUser, unknownUserPassword);
+
+		// THEN
+		assertNull(login);
+	}
+
+	@Test
 	public void loginIntoAlreadyLoggedInAccount() throws LoginException {
-		GIVEN: {
-			AuthorizedUser login = authorizationService.login(userName, userPassword);
+		// GIVEN:
+		LoginException expectedException = null;
+		authorizationService.login(USERNAME, USER_PASSWORD);
+
+		// WHEN:
+		try {
+			authorizationService.login(USERNAME, USER_PASSWORD);
+		} catch (LoginException ex) {
+			expectedException = ex;
 		}
 
-		WHEN: {
-			AuthorizedUser login = authorizationService.login(userName, userPassword);
-		}
-
-		THEN: {
-			// Nothing... exception is thrown before
-		}
+		// THEN:
+		assertNotNull(expectedException);
 	}
 
-	@Test(expected = LoginException.class)
+	@Test
 	public void loginWithBadPassword() throws LoginException {
-		GIVEN: {
+		// GIVEN:
+		LoginException expectedException = null;
 
+		// WHEN:
+		try {
+			authorizationService.login(USERNAME, USER_BADP_ASSWORD);
+		} catch (LoginException ex) {
+			expectedException = ex;
 		}
 
-		WHEN: {
-			AuthorizedUser login = authorizationService.login(userName, userBadPassword);
-		}
-
-		THEN: {
-			// Nothing... exception is thrown before
-		}
+		// THEN:
+		assertNotNull(expectedException);
 	}
 
 	@Test
 	public void generateHashedPassword() {
-		String password = null;
-		GIVEN: {
-			password = userPassword;
-		}
+		// GIVEN:
+		String password = USER_PASSWORD;
 
-		String generatedHashForGivenPassword = null;
-		WHEN: {
-			generatedHashForGivenPassword = authorizationService.generateHashPassword(password);
-		}
+		// WHEN:
+		String generatedHashForGivenPassword = authorizationService.generateHashPassword(password);
 
-		THEN: {
-			assertEquals(passwordForString123qwe, generatedHashForGivenPassword);
-		}
+		// THEN:
+		assertEquals(PASSWORD_FOR_STRING_123QWE, generatedHashForGivenPassword);
 	}
 
 	@Test
 	public void testLogout() throws LoginException {
-		AuthorizedUser login = null;
-		GIVEN: {
-			login = authorizationService.login(userName, userPassword);
-		}
+		// GIVEN:
+		AuthorizedUser login = authorizationService.login(USERNAME, USER_PASSWORD);
 
-		WHEN: {
-			authorizationService.logout(login);
-		}
+		// WHEN:
+		authorizationService.logout(login);
 
-		THEN: {
-			User user = userService.findByUserName("KirkoR");
-			assertEquals(Boolean.FALSE, user.isOnline());
-		}
+		// THEN:
+		User user = userService.findByUserName(USERNAME);
+		assertEquals(Boolean.FALSE, user.isOnline());
 	}
 }

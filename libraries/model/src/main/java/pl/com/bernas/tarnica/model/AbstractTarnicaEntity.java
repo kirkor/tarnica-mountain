@@ -16,30 +16,27 @@ import javax.persistence.Version;
  * User: iru Date: Feb 10, 2010 Time: 3:26:27 PM
  */
 @MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractTarnicaEntity implements Serializable, TarnicaEntity {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
-
+	
 	@Column(name = "creation_date", nullable = false)
 	private Timestamp creationDate;
 
 	@Version
-	@Access(AccessType.FIELD)
 	private long version;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@Override
 	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}

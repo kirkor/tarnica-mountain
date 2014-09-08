@@ -100,7 +100,7 @@ public abstract class AbstractGenericDao<T extends TarnicaEntity, PK extends Ser
 	private class QueryExecutor {
 
 		private EntityManager em;
-		private String queryString;
+		private String queryString; 
 		private List<QueryParam<? extends Object>> params;
 		private boolean uniqueResult;
 
