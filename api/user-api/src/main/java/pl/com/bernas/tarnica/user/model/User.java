@@ -15,5 +15,5 @@ public interface User extends TarnicaEntity {
 
 	public UserAddress getAddress();
 
-	public Set<? extends Role> getRoles();
+	public Set<Role> getRoles();
 }

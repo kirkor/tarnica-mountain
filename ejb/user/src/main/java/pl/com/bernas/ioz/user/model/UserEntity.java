@@ -20,6 +20,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import pl.com.bernas.tarnica.model.AbstractTarnicaEntity;
+import pl.com.bernas.tarnica.user.model.Role;
 import pl.com.bernas.tarnica.user.model.User;
 
 @Entity
@@ -46,7 +47,7 @@ public class UserEntity extends AbstractTarnicaEntity implements User {
 	@JoinTable(name = "users_to_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@Fetch(value = FetchMode.SUBSELECT)
 	// FIX: HHH-1718
-	private Set<RoleEntity> roles;	
+	private Set<Role> roles;	
 	
 	public String getUsername() {
 		return username;
@@ -96,11 +97,11 @@ public class UserEntity extends AbstractTarnicaEntity implements User {
 		this.address = address;
 	}
 
-	public Set<RoleEntity> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<RoleEntity> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 }

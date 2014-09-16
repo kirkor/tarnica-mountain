@@ -16,7 +16,7 @@ import pl.com.bernas.ioz.user.domain.UserDto;
 import pl.com.bernas.ioz.user.domain.mapper.Dozer;
 import pl.com.bernas.ioz.user.model.RoleEntity;
 import pl.com.bernas.ioz.user.model.UserEntity;
-import pl.com.bernas.ioz.user.service.UserService;
+import pl.com.bernas.tarnica.user.model.Role;
 import pl.com.bernas.tarnica.user.model.User;
 
 @Stateless(name = "userService")
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService<User> {
 		role.setName("ADMIN");
 		role.setCreationDate(new Timestamp(new Date().getTime()));
 
-		Set<RoleEntity> roles = new HashSet<RoleEntity>();
+		Set<Role> roles = new HashSet<>();
 		roles.add(role);
 
 		UserEntity entity = new UserEntity();

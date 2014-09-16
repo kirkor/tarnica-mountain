@@ -3,6 +3,7 @@ package pl.com.bernas.ioz.user.domain;
 import java.util.Set;
 
 import pl.com.bernas.tarnica.dto.AbstractDto;
+import pl.com.bernas.tarnica.user.model.Role;
 import pl.com.bernas.tarnica.user.model.User;
 
 public class UserDto extends AbstractDto implements User {
@@ -16,7 +17,7 @@ public class UserDto extends AbstractDto implements User {
 	private boolean online;
 	private UserDetailsDto details;
 	private UserAddressDto address;
-	private Set<RoleDto> roles;
+	private Set<Role> roles;
 
 	public int getVersion() {
 		return version;
@@ -66,11 +67,11 @@ public class UserDto extends AbstractDto implements User {
 		this.address = address;
 	}
 
-	public Set<RoleDto> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<RoleDto> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 }
