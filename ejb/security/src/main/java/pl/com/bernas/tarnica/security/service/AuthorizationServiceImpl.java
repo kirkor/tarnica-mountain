@@ -28,7 +28,7 @@ import pl.com.bernas.tarnica.user.model.User;
 @Remote(AuthorizationService.class)
 public class AuthorizationServiceImpl implements AuthorizationService {
 
-	private final String salt = "8RaCedRa";
+	private static final String SALT = "8RaCedRa";
 
 	@EJB(beanName = "userService")
 	UserService<User> userService;
@@ -36,30 +36,30 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	@EJB
 	Dozer dozer;
 
-	private static final Logger log = LoggerFactory.getLogger(AuthorizationServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AuthorizationServiceImpl.class);
 
 	public AuthorizedUser login(String userName, String password) throws LoginException {
-		log.info(String.format("Loggin in %s", userName));
+		LOG.info(String.format("Loggin in %s", userName));
 
 		User userDto = userService.findByUserName(userName);
 		if (userDto == null) {
-			log.error("The user with name '" + userName + "' not found.");
+			LOG.error("The user with name '" + userName + "' not found.");
 		} else {
-			password = this.generateHashPassword(password);
+			String generatedHash = this.generateHashPassword(password);
 
-			if (!userDto.getPassword().equals(password)) {
+			if (!userDto.getPassword().equals(generatedHash)) {
 				String msg = "The provided password is incorrect.";
-				log.error(msg);
+				LOG.error(msg);
 				throw new LoginException(msg);
 			} else if (userDto.isOnline()) {
 				String msg = "User is already logged in.";
-				log.error(msg);
+				LOG.error(msg);
 				throw new LoginException(msg);
 			} else {
 				userService.online(userDto);
 				
 				AuthorizedUserImpl authorizedUser = dozer.getMapper().map(userDto, AuthorizedUserImpl.class);
-				log.info("Authorization completed with success.");
+				LOG.info("Authorization completed with success.");
 				return authorizedUser;
 			}
 		}
@@ -73,7 +73,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}
 
 	String generateHashPassword(String password) {
-		return DigestUtils.sha256Hex(password + this.salt + password);
+		return DigestUtils.sha256Hex(password + this.SALT + password);
 	}
 
 }
