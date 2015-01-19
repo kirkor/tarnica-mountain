@@ -1,4 +1,6 @@
-package pl.com.bernas.tarnica.security.domain.mapper;
+package pl.com.bernas.tarnica.model.mapper;
+
+import pl.com.bernas.tarnica.model.mapper.Dozer;
 
 public class DozerFactory {
 	private static volatile Dozer instance = null;

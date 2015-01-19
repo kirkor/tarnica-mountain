@@ -1,4 +1,4 @@
-package pl.com.bernas.ioz.user.domain.mapper;
+package pl.com.bernas.tarnica.model.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public class Dozer {
 	@PostConstruct
 	void init() {		
 		List<String> mappings = new ArrayList<String>();
-		mappings.add("dozer-global-configuration.xml");
-		mappings.add("dozer-global-mappings.xml");
+		mappings.add("dozer-configuration.xml");
+		mappings.add("dozer-mappings.xml");
 		
 		mapper = new DozerBeanMapper();
 		mapper.setMappingFiles(mappings);

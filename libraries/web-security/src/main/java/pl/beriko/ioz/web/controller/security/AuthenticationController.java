@@ -24,8 +24,8 @@ import pl.beriko.ioz.web.callback.security.HttpCallbackHandler;
 import pl.beriko.ioz.web.util.AppUtil;
 import pl.beriko.ioz.web.util.SecurityUtil;
 import pl.beriko.ioz.web.util.security.LoginConfiguration;
-import pl.com.bernas.ioz.security.model.AuthorizedUser;
-import pl.com.bernas.ioz.security.service.AuthorizationService;
+import pl.com.bernas.ioz.security.model.AuthenticatedUser;
+import pl.com.bernas.ioz.security.service.AuthenticationService;
 
 @Named(value = "authController")
 @ViewScoped
@@ -34,12 +34,12 @@ public class AuthenticationController implements Serializable {
 	private static final long serialVersionUID = 7372703206344479835L;
 
 	@Inject
-	private AuthorizationService userService;
+	private AuthenticationService userService;
 
 	private String username;
 	private String password;
 	private String redirectView;
-	private AuthorizedUser user;
+	private AuthenticatedUser authenticatedUser;
 
 	public String getUsername() {
 		return username;
@@ -65,8 +65,8 @@ public class AuthenticationController implements Serializable {
 		this.redirectView = redirectView;
 	}
 
-	public AuthorizedUser getUser() {
-		return user;
+	public AuthenticatedUser getUser() {
+		return authenticatedUser;
 	}
 
 	public void login(ActionEvent actionEvent) throws LoginException, ServletException {
@@ -83,10 +83,10 @@ public class AuthenticationController implements Serializable {
 
 		RequestContext context = RequestContext.getCurrentInstance();
 
-		user = (AuthorizedUser) subject.getPublicCredentials().iterator().next();
+		authenticatedUser = (AuthenticatedUser) subject.getPublicCredentials().iterator().next();
 		redirectIfNecessary();
 
-		if (user != null) {
+		if (authenticatedUser != null) {
 			loggedIn = true;
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
 		} else {
@@ -102,13 +102,13 @@ public class AuthenticationController implements Serializable {
 		LoginContext loginContext = createLoginContext();
 		loginContext.logout();
 		AppUtil.invalidateSession();
-		this.user = null;
+		this.authenticatedUser = null;
 		return "logout_success";
 	}
 
 	private LoginContext createLoginContext() throws LoginException {
 		Subject subject = SecurityUtil.getSubject();
-		Configuration conf = new LoginConfiguration(userService, user);
+		Configuration conf = new LoginConfiguration(userService, authenticatedUser);
 		return new LoginContext("ioz", subject, new HttpCallbackHandler(username, password), conf);
 	}
 

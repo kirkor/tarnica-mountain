@@ -13,9 +13,9 @@ import javax.ejb.Stateless;
 
 import pl.com.bernas.ioz.user.dao.UserDao;
 import pl.com.bernas.ioz.user.domain.UserDto;
-import pl.com.bernas.ioz.user.domain.mapper.Dozer;
 import pl.com.bernas.ioz.user.model.RoleEntity;
 import pl.com.bernas.ioz.user.model.UserEntity;
+import pl.com.bernas.tarnica.model.mapper.Dozer;
 import pl.com.bernas.tarnica.user.model.Role;
 import pl.com.bernas.tarnica.user.model.User;
 

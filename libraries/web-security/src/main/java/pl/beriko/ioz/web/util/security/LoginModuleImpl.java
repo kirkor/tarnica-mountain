@@ -17,9 +17,9 @@ import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
 import pl.beriko.ioz.web.util.SecurityUtil;
-import pl.com.bernas.ioz.security.model.AuthorizedUser;
-import pl.com.bernas.ioz.security.model.AuthorizedUserRole;
-import pl.com.bernas.ioz.security.service.AuthorizationService;
+import pl.com.bernas.ioz.security.model.AuthenticatedUser;
+import pl.com.bernas.ioz.security.model.AuthenticatedUserRole;
+import pl.com.bernas.ioz.security.service.AuthenticationService;
 
 public class LoginModuleImpl implements LoginModule {
 
@@ -27,10 +27,10 @@ public class LoginModuleImpl implements LoginModule {
 	// TODO: move somewhere else
 	private final static String AUTH_BEAN = "ejb:ioz-ear/ioz-security-services/authorizationService!pl.beriko.ioz.service.security.AuthorizationService";
 
-	private AuthorizationService authenticationService;
+	private AuthenticationService authenticationService;
 	private Subject subject;
 	private CallbackHandler callbackHandler;
-	private AuthorizedUser user;
+	private AuthenticatedUser authenticatedUser;
 
 	public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
 		this.subject = subject;
@@ -43,7 +43,7 @@ public class LoginModuleImpl implements LoginModule {
 		try {
 			this.ctx = new InitialContext(jndiProps);
 
-			this.authenticationService = (AuthorizationService) this.ctx.lookup(LoginModuleImpl.AUTH_BEAN);
+			this.authenticationService = (AuthenticationService) this.ctx.lookup(LoginModuleImpl.AUTH_BEAN);
 		} catch (NamingException e) {
 			throw new RuntimeException(e);
 		}
@@ -70,9 +70,9 @@ public class LoginModuleImpl implements LoginModule {
 		String userName = nameCallback.getName();
 		String password = String.valueOf(passwordCallback.getPassword());
 		try {
-			user = authenticationService.login(userName, password);
+			authenticatedUser = authenticationService.login(userName, password);
 
-			if (user == null) {
+			if (authenticatedUser == null) {
 				return false;
 			} else {
 				return true;
@@ -83,13 +83,13 @@ public class LoginModuleImpl implements LoginModule {
 	}
 
 	public boolean commit() throws LoginException {
-		this.subject.getPublicCredentials().add(this.user);
-		this.subject.getPrincipals().add(this.user);
+		this.subject.getPublicCredentials().add(this.authenticatedUser);
+		this.subject.getPrincipals().add(this.authenticatedUser);
 		
-		if (!this.subject.getPrincipals().contains(this.user)) {
-            this.subject.getPrincipals().add(this.user);
+		if (!this.subject.getPrincipals().contains(this.authenticatedUser)) {
+            this.subject.getPrincipals().add(this.authenticatedUser);
             
-            user.getRoles().forEach(role -> this.subject.getPrincipals().add(role));           
+            authenticatedUser.getRoles().forEach(role -> this.subject.getPrincipals().add(role));           
         }		
 
 		SecurityUtil.propagateSubject(this.subject);
@@ -101,13 +101,13 @@ public class LoginModuleImpl implements LoginModule {
 		subject.getPrincipals().clear();
 
 		// subject.getPrincipals().add(AppUtil.getAnonymousRole());
-		user = null;
+		authenticatedUser = null;
 		return true;
 	}
 
 	public boolean logout() throws LoginException {
 		try {
-			authenticationService.logout(user);
+			authenticationService.logout(authenticatedUser);
 			return true;
 		} catch (Exception e) {
 			throw new LoginException("Can not execute logout process!!!");

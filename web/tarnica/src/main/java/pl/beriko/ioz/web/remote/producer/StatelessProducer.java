@@ -4,7 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.naming.NamingException;
 
-import pl.com.bernas.ioz.security.service.AuthorizationService;
+import pl.com.bernas.ioz.security.service.AuthenticationService;
 
 @ApplicationScoped
 public class StatelessProducer extends RemoteAccess {
@@ -14,9 +14,9 @@ public class StatelessProducer extends RemoteAccess {
 	}
 
 	@Produces
-	public AuthorizationService getAuthorizationService() {
+	public AuthenticationService getAuthorizationService() {
 		try {
-			return (AuthorizationService) ctx.lookup("ejb:ioz-ear/ioz-security-services/authorizationService!pl.beriko.ioz.service.security.AuthorizationService");
+			return (AuthenticationService) ctx.lookup("ejb:ioz-ear/ioz-security-services/authorizationService!pl.beriko.ioz.service.security.AuthorizationService");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

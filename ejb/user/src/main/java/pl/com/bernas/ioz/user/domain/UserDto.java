@@ -1,5 +1,6 @@
 package pl.com.bernas.ioz.user.domain;
 
+import java.util.Collections;
 import java.util.Set;
 
 import pl.com.bernas.tarnica.dto.AbstractDto;
@@ -68,10 +69,13 @@ public class UserDto extends AbstractDto implements User {
 	}
 
 	public Set<Role> getRoles() {
-		return roles;
+		return Collections.unmodifiableSet(roles);
 	}
 
 	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+		this.roles.clear();
+		if (roles != null) {
+			this.roles.addAll(roles);
+		}
 	}
 }
